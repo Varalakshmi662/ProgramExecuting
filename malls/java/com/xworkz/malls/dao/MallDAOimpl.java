@@ -35,12 +35,13 @@ public class MallDAOimpl implements MallDAO {
 	public MallDTO FindByName(String Name) {
 		System.out.println("invoked findByname");
 		for (MallDTO mallDTO : this.mallList) {
-			String nameFromDTO = mallDTO.getName();
-			if (nameFromDTO.equals(Name)) {
-				System.out.println("cosmetic found");
+			String name = mallDTO.getName();
+			if (name.equals(Name)) {
+				System.out.println("Malls found");
 				return mallDTO;
 			}
 		}
+		System.out.println("Malls not found");
 		return null;
 	}
 	
@@ -65,8 +66,6 @@ public class MallDAOimpl implements MallDAO {
 				mallDTO.getLocation();
 				System.out.println("updated location"+mallDTO);
 				return true;
-			}else {
-				System.out.println("mall not found");
 			}
 		}
 		System.out.println("no element in the list");
@@ -81,8 +80,8 @@ public class MallDAOimpl implements MallDAO {
 		Iterator<MallDTO> iterator = this.mallList.iterator();
 		while (iterator.hasNext()) {
 			MallDTO dto = iterator.next();
-			if (dto.getName().contentEquals(name) && dto.getLocation().contentEquals(location)) {
-				System.out.println("name and location found can delete name and location");
+			if (dto.getName().equals(name) && dto.getLocation().equals(location)) {
+				System.out.println("name and loacation found can delete");
 				iterator.remove();
 				System.out.println("mall name and location deleted");
 				return true;
@@ -97,5 +96,12 @@ public class MallDAOimpl implements MallDAO {
 	@Override
 	public String toString() {
 		return "MallDAOimpl [mallList=" + mallList + "]";
+	}
+
+	@Override
+	public List<MallDTO> getAll() {
+		System.out.println("invoking get all method");
+		return this.mallList;
 	}	
+	
 }
